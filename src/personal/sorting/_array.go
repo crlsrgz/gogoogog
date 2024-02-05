@@ -1,1 +1,1 @@
-var arrayUnsortedOne [] int = [5,6,8,4,2,3,1,3]
+var arrayUnsortedOne = []int{5, 6, 8, 4, 2, 7, 1, 3}
