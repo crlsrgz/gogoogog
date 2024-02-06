@@ -3,9 +3,36 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"strconv"
 )
 
+func input() {
+	var input string
+	var number int
+
+	for {
+		fmt.Print("integer: ")
+		_, err := fmt.Scan(&input)
+		if err != nil {
+			fmt.Println("Invalid input, integer:")
+			continue
+		}
+
+		number, err = strconv.Atoi(input)
+		if err != nil {
+			fmt.Println("Not an integer, integer:")
+			continue
+		}
+
+		// Successful conversion, exit the loop
+		break
+	}
+
+	fmt.Printf(" Integer = %d\n", number)
+}
+
 func myArrays() {
+	input()
 	fmt.Println("enter the first value of the array")
 	var firstValue int
 
