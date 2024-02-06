@@ -16,8 +16,37 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
+type Product struct {
+	Name  string
+	Price float64
+}
+
+func printProducts(list [4]Product) {
+	var cost float64
+	var totalItems int
+	listLength := len(list)
+	for i := 0; i < listLength; i++ {
+		item := list[i]
+		cost += item.Price
+
+		if item.Name != "" {
+			totalItems += 1
+		}
+	}
+	fmt.Println("Last item:", list[totalItems-1])
+	fmt.Println("Total items", totalItems)
+	fmt.Println("Total cost:", math.Round(cost+100)/100)
+}
 func main() {
-
+	shopingList := [4]Product{
+		{"banana", 1.5},
+		{"anana", 3.2},
+		{"milk", 0.74},
+	}
+	printProducts(shopingList)
 }
