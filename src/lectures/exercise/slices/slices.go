@@ -18,5 +18,26 @@ import "fmt"
 
 type Part string
 
+func printParts(parts []Part) {
+
+	fmt.Println("\n----Parts----")
+	for i := 0; i < len(parts); i++ {
+
+		element := parts[i]
+		fmt.Println(i, ".- ", element)
+
+	}
+}
+
 func main() {
+	//partsExample := make([]Part, 3)
+	parts := []Part{"cog", "cable", "fuse"}
+	printParts(parts)
+
+	parts = append(parts, "led")
+	parts = append(parts, "wheel")
+	printParts(parts)
+
+	parts = parts[3:]
+	printParts(parts)
 }
