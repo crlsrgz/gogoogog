@@ -19,7 +19,12 @@
 
 package main
 
-import "fmt"
+type Book struct {
+	name string
+}
+type Meber struct {
+	name string
+}
 
 func main() {
 
