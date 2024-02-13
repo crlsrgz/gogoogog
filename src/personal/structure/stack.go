@@ -18,7 +18,7 @@ func createStack() Stack {
 	return *stack
 }
 
-func (stack *Stack) addNode(value int) *Stack {
+func (stack *Stack) addNode(value int) {
 
 	node := SNode{value, nil}
 
@@ -26,15 +26,41 @@ func (stack *Stack) addNode(value int) *Stack {
 
 	if stack.head == nil && stack.tail == nil {
 		stack.head = &node
-		stack.tail = stack.head
+		// stack.tail = stack.head
+		return
 	}
-	return stack
+	node.prev = stack.head
+	stack.head = &node
+}
+func (stack *Stack) pop() int {
+
+}
+
+func (stack *Stack) peek() {
+	if stack.head != nil {
+		fmt.Println(stack.head.value)
+
+	} else {
+
+		fmt.Println("empty")
+	}
+
+}
+func (stack *Stack) stackLength() {
+	fmt.Println("Stack length is: ", stack.length)
 }
 
 func main() {
 
 	fmt.Println("///...///")
 	myStack := createStack()
-	myStack.addNode(3)
+	myStack.addNode(1)
+	myStack.addNode(22)
+	myStack.peek()
+	myStack.stackLength()
+
+	myStack.addNode(33)
+	myStack.peek()
+	myStack.stackLength()
 	fmt.Println(myStack.head, myStack.tail)
 }
