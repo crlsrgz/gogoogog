@@ -17,7 +17,7 @@ func createQueue() Queue {
 	return *queue
 }
 
-func addToQueue(queue *Queue, nodeValue int) *Queue {
+func (queue *Queue) addToQueue(nodeValue int) *Queue {
 	node := QueueNode{nodeValue, nil}
 
 	queue.length++
@@ -29,7 +29,7 @@ func addToQueue(queue *Queue, nodeValue int) *Queue {
 	queue.tail = &node
 	return queue
 }
-func removeFromQueue(queue *Queue) int {
+func (queue *Queue) removeFromQueue() int {
 	if queue.head == nil {
 		fmt.Println("error, the queue is empty")
 		return -1
@@ -42,7 +42,7 @@ func removeFromQueue(queue *Queue) int {
 
 	return newHead.value
 }
-func peekQueue(queue *Queue) int {
+func (queue *Queue) peekQueue() int {
 	if queue.head == nil {
 		fmt.Println("error, the queue is empty, no head value")
 		return -1
@@ -50,9 +50,9 @@ func peekQueue(queue *Queue) int {
 	fmt.Println("peeked:", queue.head.value)
 	return queue.head.value
 }
-func lengthQueue(queue *Queue) int {
+func (queue *Queue) lengthQueue() int {
 	if queue.head == nil {
-		fmt.Println("error, mo length, the queue is empty")
+		fmt.Println("error, no length, the queue is empty")
 		return -1
 	}
 	fmt.Println("length:", queue.length)
@@ -62,21 +62,21 @@ func lengthQueue(queue *Queue) int {
 func main() {
 	myQueue := createQueue()
 	fmt.Println(myQueue.head)
-	removeFromQueue(&myQueue)
-	lengthQueue(&myQueue)
+	myQueue.removeFromQueue()
+	myQueue.lengthQueue()
 
-	addToQueue(&myQueue, 11)
-	addToQueue(&myQueue, 22)
-	addToQueue(&myQueue, 33)
+	myQueue.addToQueue(11)
+	myQueue.addToQueue(22)
+	myQueue.addToQueue(33)
 
-	lengthQueue(&myQueue)
+	myQueue.lengthQueue()
 	fmt.Println("head:", myQueue.head)
 	fmt.Println("tail:", myQueue.tail)
-	removeFromQueue(&myQueue)
-	lengthQueue(&myQueue)
-	peekQueue(&myQueue)
+	myQueue.removeFromQueue()
+	myQueue.lengthQueue()
+	myQueue.peekQueue()
 	fmt.Println("head:", myQueue.head)
 	fmt.Println("tail:", myQueue.tail)
-	lengthQueue(&myQueue)
+	myQueue.lengthQueue()
 
 }
