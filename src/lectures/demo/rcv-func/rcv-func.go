@@ -21,7 +21,7 @@ func (coordinates *Coordinate) shiftBy(x, y int) {
 
 func main() {
 	coord := Coordinate{2, 2}
-	shiftBy(1, 1, &coord)
+	shiftBy(1, 2, &coord)
 	fmt.Println("normal function:", coord)
 	coord.shiftBy(2, 3)
 	fmt.Println("receiver function:", coord)
