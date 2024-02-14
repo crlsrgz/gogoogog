@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type SNode struct {
 	value int
@@ -18,7 +20,7 @@ func createStack() Stack {
 	return *stack
 }
 
-func (stack *Stack) addNode(value int) {
+func (stack *Stack) push(value int) {
 
 	node := SNode{value, nil}
 
@@ -33,6 +35,20 @@ func (stack *Stack) addNode(value int) {
 	stack.head = &node
 }
 func (stack *Stack) pop() int {
+
+	if stack.length <= 0 {
+		stack.length = 0
+	} else {
+		stack.length -= 1
+	}
+	if stack.length == 0 {
+		head := stack.head
+		stack.head = nil
+		return head.value
+	}
+	head := stack.head
+	stack.head = head.prev
+	return head.value
 
 }
 
@@ -54,13 +70,26 @@ func main() {
 
 	fmt.Println("///...///")
 	myStack := createStack()
-	myStack.addNode(1)
-	myStack.addNode(22)
+	myStack.push(1)
+	myStack.push(22)
 	myStack.peek()
 	myStack.stackLength()
 
-	myStack.addNode(33)
+	myStack.push(33)
+	myStack.stackLength()
+	myStack.peek()
+	myStack.pop()
 	myStack.peek()
 	myStack.stackLength()
-	fmt.Println(myStack.head, myStack.tail)
+	myStack.push(44)
+	myStack.push(66)
+	myStack.stackLength()
+	myStack.peek()
+	myStack.pop()
+	myStack.peek()
+	myStack.stackLength()
+	myStack.push(55)
+	myStack.peek()
+	myStack.stackLength()
+	fmt.Println(myStack.head.value, myStack.tail)
 }
