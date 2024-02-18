@@ -30,6 +30,19 @@ func (q *Queue) enqueue(value QNodeValuer) {
 
 }
 
+func (q *Queue) dequeue() QNodeValuer{
+	if q.head == nil {
+		fmt.Println("error: Empty Queue")
+		return -1
+	}
+	q.length--
+	head := q.head
+	q.head = q.head.next
+	
+	return head.value
+
+}
+
 
 
 func main() {
@@ -44,6 +57,8 @@ func main() {
 	myQueue := Queue{}
 	fmt.Println(myQueue)
 	fmt.Println("Queue length: ", myQueue.length)
+	fmt.Println("////-1");
+	myQueue.dequeue()
 	fmt.Println("////");
 	myQueue.enqueue(4)
 	fmt.Println("Queue length: ", myQueue.length)
@@ -57,6 +72,11 @@ func main() {
 	myQueue.enqueue("five")
 	fmt.Println("Queue length: ", myQueue.length)
 	fmt.Println(myQueue.tail)
+	fmt.Println("////deq*2");
+	fmt.Println(myQueue.dequeue())
+	fmt.Println(myQueue.dequeue())
+	fmt.Println("Queue length: ", myQueue.length)
+	fmt.Println(myQueue.head, myQueue.tail)
 	
 
 }
