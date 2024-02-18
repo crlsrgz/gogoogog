@@ -1,6 +1,0 @@
-go 1.21.6
-
-//CLI
-// go work init
-// go work use ./src/lectures
-use ./src/lectures
