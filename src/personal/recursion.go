@@ -24,8 +24,18 @@ func countDown(numb int) int {
 
 	return numb
 }
+func countDownPrint(numb int)  {
+	if numb == 0 {
+		return 
+	}
+	fmt.Println("number is ->", numb)
+	countDownPrint(numb - 1)
+	fmt.Println("callstack unwound BAz")
+
+}
 
 func main() {
 	fmt.Println("recursionSimple", recursionSimple((6)))
 	fmt.Println("countDown", countDown(6))
+	countDownPrint(4)
 }
