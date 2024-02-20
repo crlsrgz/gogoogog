@@ -4,38 +4,23 @@ import (
 	"errors"
 	"fmt"
 )
-
-func divide(lhs, rhs int) (int, error) {
-	if rhs == 0 {
-		return 0, errors.New("cannot divide by zero")
-	} else {
-		return rhs / lhs, nil
-	}
+type Stuff struct {
+	values []int
 }
-type DivError struct {
-	a, b int
-}
-func (d *DivError) Error() string {
-	return fmt.Sprintf("Cannot divide by Zero:%d /%d", d.a, d.b)
-}
-func div(a, b int) (int, error){
-	if b == 0 {
-		return 0, &DivError{a, b}
-	} else {
-		return a/b, nil
+func (stuff *Stuff) Get(index int) (int, error){
+	if index > len(stuff.values){
+		return 0, errors.New(fmt.Sprintf("no element at index %v", index))
+	}else {
+		return stuff.values[index], nil
 	}
 }
 func main() {
 	fmt.Println("//////")
-	fmt.Println(divide(10, 200))
-	fmt.Println(divide(10, 0))
-	fmt.Println("//////")
-
-	answerOne, err := div(9,0)
+	stuff := Stuff{}
+	value, err := stuff.Get(1)
 	if err != nil {
 		fmt.Println(err)
-		return
-
+	}else {
+		fmt.Println("value=", value)
 	}
-	fmt.Println("div answer is", answerOne)
 }
