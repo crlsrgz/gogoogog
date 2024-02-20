@@ -17,6 +17,7 @@ func powerRecursive(base, exponent int)int {
 	if exponent == 0 {
 		return 1
 	}	
+	fmt.Printf("rec val %vx%v= %v\n",base, (powerRecursive(base, exponent-1)),(base * powerRecursive(base, exponent-1)))
 	return base * powerRecursive(base, exponent-1)
 }
 
