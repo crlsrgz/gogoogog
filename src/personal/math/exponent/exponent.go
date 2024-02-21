@@ -44,6 +44,7 @@ func expontentGo(base, exponent int) int {
 func main() {
 	fmt.Printf("2^2 is equal to %v\n", power(2, 2))
 	fmt.Printf("2^8 is equal to %v\n", power(2, 3))
+	fmt.Printf("3^4 is equal to %v\n", power(3, 4))
 	fmt.Printf("2^8 is equal to %v, using recursion\n", powerRecursive(2, 3))
 	fmt.Printf("golang 2^8 is equal to %v\n", expontentGo(2, 3))
 	fmt.Printf("2^3 * 2^4 is equal to %v\n", multiplyPower(2, 3, 4))
