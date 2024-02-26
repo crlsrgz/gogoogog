@@ -27,6 +27,9 @@ type Velocity float64
 type Number interface {
 	constraints.Float | constraints.Integer
 }
+type MyType interface {
+	string | int
+}
 
 // The `clamp` function returns a value that has been "clamped"
 // within a specific range of numbers. The `min` value is the
@@ -98,6 +101,9 @@ func testClampVelocity() {
 }
 
 func main() {
+
+	var oneValue MyType = "hello"
+	var twoValue Number = 11
 	testClampInt8()
 	testClampUint32()
 	testClampFloat32()
