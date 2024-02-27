@@ -13,11 +13,11 @@ func power(base, exponent int) int {
 	return result
 
 }
-func powerRecursive(base, exponent int)int {
+func powerRecursive(base, exponent int) int {
 	if exponent == 0 {
 		return 1
-	}	
-	fmt.Printf("rec val %vx%v= %v\n",base, (powerRecursive(base, exponent-1)),(base * powerRecursive(base, exponent-1)))
+	}
+	fmt.Printf("rec val %vx%v= %v\n", base, (powerRecursive(base, exponent-1)), (base * powerRecursive(base, exponent-1)))
 	return base * powerRecursive(base, exponent-1)
 }
 
@@ -29,11 +29,11 @@ func multiplyPower(base, firstExp, secondExp int) int {
 	}
 	return result
 }
-func exponential(n int) int{
+func factorial(n int) int {
 	if n == 0 {
 		return 1
 	}
-	return n * exponential(n-1)
+	return n * factorial(n-1)
 }
 
 func expontentGo(base, exponent int) int {
@@ -48,6 +48,6 @@ func main() {
 	fmt.Printf("2^8 is equal to %v, using recursion\n", powerRecursive(2, 3))
 	fmt.Printf("golang 2^8 is equal to %v\n", expontentGo(2, 3))
 	fmt.Printf("2^3 * 2^4 is equal to %v\n", multiplyPower(2, 3, 4))
-	fmt.Printf("Exponential of 4 is %v\n", exponential(4))
-	fmt.Printf("Exponential of 5 is %v\n", exponential(5))
+	fmt.Printf("Exponential of 4 is %v\n", factorial(4))
+	fmt.Printf("Exponential of 5 is %v\n", factorial(5))
 }
