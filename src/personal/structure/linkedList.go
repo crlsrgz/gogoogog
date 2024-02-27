@@ -43,20 +43,21 @@ func (l *List) removeNode(value int) int {
 	}
 
 	if l.head.data == value {
-		removed := l.head
+		tmp := l.head
 		l.head = l.head.next
-		fmt.Println("removed node value is:", removed.data)
+		fmt.Println("removed node value is:", tmp.data)
 
-		return removed.data
+		return tmp.data
 
 	}
 	current := l.head
 	var tmp int
 	for {
 		if current == nil {
+			fmt.Println("Empty list")
 			break
 		}
-		if current.next.data == value {
+		if current != nil && current.next != nil {
 			l.length--
 			tmp = current.next.data
 			current.next = current.next.next
@@ -80,6 +81,7 @@ func main() {
 	myList.addNode(2)
 	myList.addNode(3)
 	myList.addNode(4)
+	myList.addNode(5)
 	fmt.Println("expe is =", myList.head.next.next.data, "tail is =", myList.tail)
 	myList.removeNode(4)
 	myList.listLenght()
@@ -90,5 +92,6 @@ func main() {
 	myList.listLenght()
 	fmt.Println("head is =", myList.head.data)
 	fmt.Println("tail is =", myList.tail.data)
+	fmt.Println(myList)
 
 }
