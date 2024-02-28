@@ -25,8 +25,8 @@ func main() {
 			fmt.Println("Waiting for", duration)
 			time.Sleep(duration)
 		}()
-		fmt.Println("waiting for gotoutines to finish")
-		wg.Wait()
-		fmt.Println("done")
 	}
+	fmt.Println("waiting for gotoutines to finish")
+	wg.Wait()
+	fmt.Println("done")
 }
