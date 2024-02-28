@@ -93,7 +93,7 @@ func (l *List) listLenght() int {
 	return l.length
 }
 
-func (l *List) printValues() {
+func (l *List) printValues() []int {
 	if l.length <= 0 {
 		fmt.Println("The list is empty")
 	}
@@ -102,8 +102,8 @@ func (l *List) printValues() {
 
 	for {
 		if current == nil {
-			fmt.Println("List values:", values)
-			return
+			// fmt.Println("List values:", values)
+			return values
 		}
 		values = append(values, current.data)
 		current = current.next
