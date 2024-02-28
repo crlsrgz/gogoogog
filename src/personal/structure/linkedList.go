@@ -10,7 +10,7 @@ type List struct {
 	length int
 }
 type NodeData interface {
-	string | int64 | uint64 | float64 | bool
+	string | int | int64 | uint64 | float64 | bool
 }
 type Node struct {
 	data int
@@ -37,10 +37,11 @@ func (l *List) addNode(value int) {
 	l.tail = &node
 
 }
-func (l *List) removeNode(value int) int {
+func (l *List) removeByValue(value int) int {
 	if l.head == nil {
 		return -1
 	}
+	//: Is the head
 
 	if l.head.data == value {
 		l.length--
@@ -50,32 +51,38 @@ func (l *List) removeNode(value int) int {
 
 		return tmp.data
 	}
-
+	//: Is after the head?
 	current := l.head
 	var tmp int
+
 	for {
 		if current == nil {
 			fmt.Println("Empty list")
 			break
 		}
-		if l.tail.data == value {
+		//: Is the Tail?
+
+		if current.next.data == value && l.tail.data == value {
 			l.length--
-			fmt.Println("current", current)
 			tmp = l.tail.data
-			l.tail = current.next
 			current.next = nil
+			l.tail = current
 			break
 		}
+
 		if current.next.data == value {
 			l.length--
 			tmp = current.next.data
-			fmt.Println("current", current)
-			fmt.Println("current.next.next", current.next.next)
-			current = current.next.next
+			// fmt.Println("current", current.data)
+			// fmt.Println("current.next.next", current.next.next.data)
+			current.next = current.next.next
 
 			break
 		}
-
+		if current.next == l.tail {
+			fmt.Println("nomore")
+			break
+		}
 		current = current.next
 	}
 	fmt.Println("removed value:", tmp)
@@ -83,28 +90,68 @@ func (l *List) removeNode(value int) int {
 }
 
 func (l *List) listLenght() int {
-	// fmt.Printf("The length is %v\n", l.length)
 	return l.length
 }
+
+func (l *List) printValues() {
+	if l.length <= 0 {
+		fmt.Println("The list is empty")
+	}
+	values := []int{}
+	current := l.head
+
+	for {
+		if current == nil {
+			fmt.Println("List values:", values)
+			return
+		}
+		values = append(values, current.data)
+		current = current.next
+	}
+}
+
+// /TEMP
+
 func main() {
 
 	myList := List{}
 	fmt.Println(myList)
+	myList.printValues()
 	fmt.Println("///////////////////")
 	myList.addNode(2)
 	myList.addNode(3)
 	myList.addNode(4)
 	myList.addNode(5)
 	myList.addNode(6)
+	myList.printValues()
 	fmt.Printf("head: %v, tail: %v, lenght: %v\n", myList.head.data, myList.tail.data, myList.listLenght())
-	fmt.Println(myList.head.next.next)
-	myList.removeNode(3)
-	fmt.Printf("head: %v, tail: %v, lenght: %v\n", myList.head.data, myList.tail.data, myList.listLenght())
-	fmt.Println("///////////////////")
-	myList.removeNode(5)
+	myList.removeByValue(3)
+	myList.printValues()
 	fmt.Printf("head: %v, tail: %v, lenght: %v\n", myList.head.data, myList.tail.data, myList.listLenght())
 	fmt.Println("///////////////////")
-	myList.removeNode(6)
+	myList.removeByValue(5)
+	myList.printValues()
+	fmt.Printf("head: %v, tail: %v, lenght: %v\n", myList.head.data, myList.tail.data, myList.listLenght())
+	fmt.Println("///////////////////")
+	myList.removeByValue(6)
+	myList.printValues()
+	fmt.Printf("head: %v, tail: %v, lenght: %v\n", myList.head.data, myList.tail.data, myList.listLenght())
+	myList.removeByValue(2)
+	myList.printValues()
+	fmt.Printf("head: %v, tail: %v, lenght: %v\n", myList.head.data, myList.tail.data, myList.listLenght())
+	fmt.Println("///////////////////")
+	myList.addNode(2)
+	myList.addNode(3)
+	myList.addNode(5)
+	myList.addNode(5)
+	myList.addNode(6)
+	myList.removeByValue(4)
+	myList.printValues()
+	fmt.Printf("head: %v, tail: %v, lenght: %v\n", myList.head.data, myList.tail.data, myList.listLenght())
+	fmt.Println("///////////////////")
+	myList.removeByValue(4)
+	myList.removeByValue(8)
+	myList.printValues()
 	fmt.Printf("head: %v, tail: %v, lenght: %v\n", myList.head.data, myList.tail.data, myList.listLenght())
 
 }
