@@ -13,6 +13,7 @@ func createSSL(arrAdd, arrRemove []int) []int {
 	for i := 0; i < len(arrRemove); i++ {
 		firstList.removeByValue(arrRemove[i])
 	}
+	fmt.Println("values to remove: ", arrRemove)
 	arr := firstList.printValues()
 	return arr
 
