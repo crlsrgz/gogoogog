@@ -36,6 +36,51 @@ func factorial(n int) int {
 	return n * factorial(n-1)
 }
 
+// Multiply two expressions with the same base
+// x^n * x^m = x^n+m
+
+func multiplyTwoPowerSameBase(base, firstExponent, secondExponent int) int {
+	var result int = base
+	totalExponent := firstExponent + secondExponent
+
+	for totalExponent > 1 {
+		result = result * base
+		fmt.Printf("check: %v\n", result)
+
+		totalExponent -= 1
+	}
+
+	return result
+}
+
+// Multiply two expressions with the same base
+// x^n / x^m = x^n-m
+
+func divideTwoPowerSameBase(base, firstExponent, secondExponent int) int {
+	var result int = base
+	totalExponent := firstExponent - secondExponent
+	for totalExponent > 1 {
+		result = result * base
+		totalExponent -= 1
+	}
+	return result
+}
+
+// Power a base with exponent
+// (x^n)^m = x^n*m
+
+func doublePower(base, firstExponent, secondExponent int) int {
+	var result int = base
+	totalExponent := firstExponent * secondExponent
+	for totalExponent > 1 {
+		result = result * base
+		totalExponent -= 1
+	}
+	return result
+
+}
+
+// ///////////////////
 func expontentGo(base, exponent int) int {
 	operation := math.Pow(float64(base), float64(exponent))
 	var result int = int(operation)
@@ -50,4 +95,8 @@ func main() {
 	fmt.Printf("2^3 * 2^4 is equal to %v\n", multiplyPower(2, 3, 4))
 	fmt.Printf("Exponential of 4 is %v\n", factorial(4))
 	fmt.Printf("Exponential of 5 is %v\n", factorial(5))
+	fmt.Printf("two power same base mult %v\n", multiplyTwoPowerSameBase(2, 3, 2))
+	fmt.Printf("two power same base divide %v\n", divideTwoPowerSameBase(2, 4, 2))
+	fmt.Printf("(2^3)^3 %v\n", doublePower(2, 3, 3))
+
 }
