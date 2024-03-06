@@ -14,6 +14,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"sync"
 
 	"github.com/chai2010/webp"
 	"github.com/google/uuid"
@@ -74,12 +75,12 @@ func saveToDisk(imgBuf bytes.Buffer) string {
 	return filename
 }
 
-func fanIn[T any][channel ...<-T] <-chan T {
+func fanIn[T any](channels ...<-chan T) <-chan T {
 	var wg sync.WaitGroup
 	out := make(chan T)
 	wg.Add(len(channels))
 	for _, ch := range channels {
-		go func (in <-chan T) {
+		go func(in <-chan T) {
 			for i := range in {
 				out <- i
 			}
@@ -91,6 +92,7 @@ func fanIn[T any][channel ...<-T] <-chan T {
 		wg.Wait()
 		close(out)
 	}()
+	return out
 }
 
 func main() {
@@ -100,7 +102,6 @@ func main() {
 	rawImages2 := pipeline(base64Images, base64ToRawImage)
 	rawImages3 := pipeline(base64Images, base64ToRawImage)
 	rawImages := fanIn(rawImages1, rawImages2, rawImages3)
-
 
 	webpImages1 := pipeline(rawImages, encodeToWebp)
 	webpImages2 := pipeline(rawImages, encodeToWebp)
