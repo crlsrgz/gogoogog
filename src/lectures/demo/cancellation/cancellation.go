@@ -35,13 +35,18 @@ func makeWork(base64Images ...string) <-chan string {
 	return out
 }
 
-func pipeline[I any, O any](input <-chan I, process func(I) O) <-chan O {
+func pipeline[I any, O any](quit <-chan struct{}, input <-chan I, process func(I) O) <-chan O {
 	out := make(chan O)
 	go func() {
+		defer close(out)
 		for in := range input {
+			select {
+			case out <- process(in):
+			case <-quit:
+				return
+			}
 			out <- process(in)
 		}
-		close(out)
 	}()
 	return out
 }
@@ -73,8 +78,13 @@ func saveToDisk(imgBuf bytes.Buffer) string {
 
 func main() {
 	base64Images := makeWork(img1, img2, img3)
+	quit := make(chan struct{})
+	var signal struct{}
 	rawImages := pipeline(base64Images, base64ToRawImage)
 	webpImages := pipeline(rawImages, encodeToWebp)
+
+	quit <- signal
+
 	filenames := pipeline(webpImages, saveToDisk)
 	for name := range filenames {
 		fmt.Println(name)
