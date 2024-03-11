@@ -17,56 +17,28 @@
 
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
-func input(valueName string) int {
-	var input string
-	var number int
-
-	for {
-		fmt.Print("Whole number for ", valueName, ": ")
-		_, err := fmt.Scan(&input)
-		if err != nil {
-			fmt.Println("Invalid input, Whole number for ", valueName, ": ")
-			continue
-		}
-
-		number, err = strconv.Atoi(input)
-		if err != nil {
-			fmt.Println("Not a Whole number, Whole number for ", valueName, ": ")
-			continue
-		}
-
-		// Successful conversion, exit the loop
-		break
-	}
-	return number
-	// fmt.Printf(" Integer = %d\n", number)
+type Len interface {
+	int | float32
 }
 
-type Rectangle struct {
-	Width     int
-	Length    int
-	Perimeter int
-	Area      int
+type Rectangle[L Len] struct {
+	len L
+	wid L
+}
+
+func area(len, wid int) int {
+	return len * wid
+}
+
+func perimeter(len, wid int) int {
+	return (len * 2) + (wid * 2)
 }
 
 func main() {
-	widthValue := input("width")
-	lengthValue := input("length")
-	//fmt.Println(widthValue, lengthValue)
+	recOne := Rectangle[int]{3, 4}
 
-	rectangleOne := Rectangle{}
-	rectangleOne.Width = widthValue
-	rectangleOne.Length = lengthValue
-
-	rectangleArea := rectangleOne.Width * rectangleOne.Length
-	rectanglePerimeter := (rectangleOne.Width * 2) + (rectangleOne.Length * 2)
-	rectangleOne.Area = rectangleArea
-	rectangleOne.Perimeter = rectanglePerimeter
-	fmt.Println(rectangleOne, " Perimeter: ", rectanglePerimeter, "; ", "Area: ", rectangleArea)
+	fmt.Println(area(recOne.len, recOne.wid))
 
 }

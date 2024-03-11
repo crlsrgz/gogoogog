@@ -7,43 +7,41 @@ type Passenger struct {
 	TicketNumber int
 	Boarded      bool
 }
+
 type Bus struct {
 	FrontSeat Passenger
 }
 
 func main() {
-	casey := Passenger{"Casey", 1, false}
-	fmt.Println(casey)
+	john := Passenger{"John", 1, false}
+	fmt.Println(john)
 
-	var (
-		bill = Passenger{Name: "Bill", TicketNumber: 2}
-		ella = Passenger{Name: "Ella", TicketNumber: 3}
-	)
-	fmt.Println(bill, ella)
+	var bill = Passenger{Name: "Bill", TicketNumber: 2}
+	var jane = Passenger{Name: "Jane", TicketNumber: 3}
 
-	var heidi Passenger
-	heidi.Name = "Heidi"
-	heidi.TicketNumber = 4
+	fmt.Println(bill, jane)
 
-	fmt.Println(heidi)
+	var jamie Passenger
+	jamie.Name = "Jamie"
+	jamie.TicketNumber = 4
 
-	casey.Boarded = true
+	fmt.Println(jamie)
+
+	john.Boarded = true
 	bill.Boarded = true
-
 	if bill.Boarded {
-		fmt.Println("Bill has boarded the bus")
-	}
-	if casey.Boarded {
-		fmt.Println(casey.Name, "has boarded the bus")
+		fmt.Println("Bill boarded")
+
 	}
 
-	fmt.Println(heidi)
-	heidi.Boarded = true
-	bus := Bus{heidi}
-	fmt.Println(bus)
+	if john.Boarded {
+		fmt.Println("john boarded")
+
+	}
+
+	jamie.Boarded = true
+	bus := Bus{jamie}
+	//Access the Passager from the bus struct
 	fmt.Println(bus.FrontSeat.Name, "is in the front seat")
-
-	person := MyStructure{"Ron", "weasley", 11}
-	fmt.Println(person.Name)
 
 }
