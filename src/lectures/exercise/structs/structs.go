@@ -36,9 +36,17 @@ func perimeter(len, wid int) int {
 	return (len * 2) + (wid * 2)
 }
 
+func areaTwo(len, wid int) int {
+	return len * wid
+}
+
+func perimeterTwo(len, wid int) int {
+	return (len * 2) + (wid * 2)
+}
 func main() {
 	recOne := Rectangle[int]{3, 4}
 
 	fmt.Println(area(recOne.len, recOne.wid))
+	fmt.Println(perimeter(recOne.len, recOne.wid))
 
 }
